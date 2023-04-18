@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: deploy1
+  name: deploy1
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: deploy1
+  template:
+    metadata:
+      labels:
+        app: deploy1
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+        - name: multitool
+          image: wbitt/network-multitool
+          ports:
+            - name: http-8080
+              containerPort: 8080
+              protocol: TCP
+
